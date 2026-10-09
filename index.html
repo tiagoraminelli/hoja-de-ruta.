@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+
+  <title>Hoja de Ruta y Viáticos | S.E.T.</title>
+  <link rel="icon" href="logo-hospital.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base:    '#262626',
+            soft:    '#525252',
+            muted:   '#737373',
+            line:    '#d4d4d4',
+            surface: '#f5f5f5',
+          },
+          fontFamily: { sans: ['Arial', 'Helvetica', 'sans-serif'] },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body class="bg-[#f3f4f6] text-base font-sans text-[13px] leading-[1.45] antialiased">
+
+  <!-- ===== HEADER ===== -->
+  <header class="no-print bg-white border-b border-[#e5e5e5]">
+    <div class="max-w-[1200px] min-h-[78px] mx-auto px-6 py-[15px] flex items-center justify-between gap-5 flex-wrap">
+      <div class="flex items-center gap-[13px] min-w-0">
+        <img src="logo-hospital.png" alt="Logo del hospital" class="w-[46px] h-[46px] object-contain shrink-0">
+        <div>
+          <h1 class="m-0 text-[16px] font-bold tracking-[-0.3px]">Hospital Julio César Villanueva</h1>
+          <p class="mt-1 mb-0 text-muted text-[12px]">Hoja de Ruta y Viáticos · Sistema de Emergencias y Traslados</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" onclick="limpiarPlanilla()"
+                class="inline-flex items-center justify-center gap-[7px] min-h-[36px] px-[13px] py-2
+                       border border-line rounded-[5px] bg-white text-[12px] font-semibold
+                       hover:bg-surface hover:border-[#a3a3a3] transition-colors">
+          Limpiar
+        </button>
+        <button type="button" onclick="imprimirPlanilla()"
+                class="inline-flex items-center justify-center gap-[7px] min-h-[36px] px-[13px] py-2
+                       border border-base rounded-[5px] bg-base text-white text-[12px] font-semibold
+                       hover:bg-[#404040] transition-colors">
+          Imprimir planilla
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== WORKSPACE ===== -->
+  <main class="no-print w-[min(100%-32px,1050px)] mx-auto mt-[25px] mb-10">
+
+    <div class="mb-[17px]">
+      <h2 class="m-0 text-[19px] font-bold tracking-[-0.4px]">Hoja de Ruta y Viáticos</h2>
+      <p class="mt-[5px] mb-0 text-muted text-[12px]">Completá los datos del traslado y prepará la planilla para imprimir.</p>
+    </div>
+
+    <!-- 01 -->
+    <section class="bg-white border border-[#e5e5e5] rounded-[7px] shadow-[0_2px_5px_rgb(0_0_0_/_2%)] p-[19px] mb-[18px]">
+      <div class="pb-[6px] mb-4 border-b border-[#bdbdbd]">
+        <h3 class="m-0 text-[11px] font-extrabold uppercase tracking-[0.45px] text-[#404040]">01 · Datos del vehículo y comisión</h3>
+        <p class="mt-[3px] mb-0 text-[11px] text-muted">Información general del servicio realizado.</p>
+      </div>
+
+      <div class="grid grid-cols-12 gap-[13px]">
+        <div class="col-span-12 md:col-span-4 flex flex-col gap-[5px] min-w-0">
+          <label for="tipoVehiculo" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Tipo de vehículo</label>
+          <input id="tipoVehiculo" type="text" placeholder="Ej.: Ambulancia"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        placeholder:text-[#a3a3a3] hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-4 flex flex-col gap-[5px] min-w-0">
+          <label for="patente" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Patente</label>
+          <input id="patente" type="text" placeholder="Dominio del vehículo"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        placeholder:text-[#a3a3a3] hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-4 flex flex-col gap-[5px] min-w-0">
+          <label for="fecha" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Fecha de la comisión</label>
+          <input id="fecha" type="date"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 flex flex-col gap-[5px] min-w-0">
+          <label for="chofer" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Asignado a (chofer)</label>
+          <input id="chofer" type="text" placeholder="Apellido y nombre"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        placeholder:text-[#a3a3a3] hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 flex flex-col gap-[5px] min-w-0">
+          <label for="objeto" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Objeto de la comisión</label>
+          <input id="objeto" type="text" placeholder="Motivo del traslado o comisión"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        placeholder:text-[#a3a3a3] hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-4 flex flex-col gap-[5px] min-w-0">
+          <label for="fechaSalida" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Fecha de salida</label>
+          <input id="fechaSalida" type="date"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-4 flex flex-col gap-[5px] min-w-0">
+          <label for="horaSalida" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Hora de salida</label>
+          <input id="horaSalida" type="time"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-4 flex flex-col gap-[5px] min-w-0">
+          <label for="kmSalida" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Kilómetros de salida</label>
+          <input id="kmSalida" type="number" min="0" placeholder="0"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        placeholder:text-[#a3a3a3] hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-4 flex flex-col gap-[5px] min-w-0">
+          <label for="fechaRegreso" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Fecha de regreso</label>
+          <input id="fechaRegreso" type="date"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-4 flex flex-col gap-[5px] min-w-0">
+          <label for="horaRegreso" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Hora de regreso</label>
+          <input id="horaRegreso" type="time"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-4 flex flex-col gap-[5px] min-w-0">
+          <label for="kmRegreso" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Kilómetros de regreso</label>
+          <input id="kmRegreso" type="number" min="0" placeholder="0"
+                 class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] text-base
+                        placeholder:text-[#a3a3a3] hover:border-[#a3a3a3]
+                        focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="bg-white border border-[#e5e5e5] rounded-[7px] shadow-[0_2px_5px_rgb(0_0_0_/_2%)] p-[19px] mb-[18px]">
+      <div class="pb-[6px] mb-4 border-b border-[#bdbdbd]">
+        <h3 class="m-0 text-[11px] font-extrabold uppercase tracking-[0.45px] text-[#404040]">02 · Verificación de equipamiento y documentación</h3>
+        <p class="mt-[3px] mb-0 text-[11px] text-muted">Marcá los elementos disponibles en el vehículo.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-[10px] gap-y-[8px] p-[10px] border border-[#e5e5e5] rounded-[4px] bg-[#fafafa]">
+        <label class="check-item"><input type="checkbox" id="eqGato"> Gato</label>
+        <label class="check-item"><input type="checkbox" id="eqAuxilio"> Rueda de auxilio</label>
+        <label class="check-item"><input type="checkbox" id="eqBalizas"> Balizas plásticas</label>
+        <label class="check-item"><input type="checkbox" id="eqVerde"> Tarjeta verde</label>
+        <label class="check-item"><input type="checkbox" id="eqCombustible"> Tarjeta de combustible</label>
+        <label class="check-item"><input type="checkbox" id="eqEnganche"> Enganche</label>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="bg-white border border-[#e5e5e5] rounded-[7px] shadow-[0_2px_5px_rgb(0_0_0_/_2%)] p-[19px] mb-[18px]">
+      <div class="pb-[6px] mb-4 border-b border-[#bdbdbd]">
+        <h3 class="m-0 text-[11px] font-extrabold uppercase tracking-[0.45px] text-[#404040]">03 · Registro de trayectos</h3>
+        <p class="mt-[3px] mb-0 text-[11px] text-muted">Indicá el origen y destino de cada tramo realizado.</p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse table-fixed text-[12px]">
+          <thead>
+            <tr>
+              <th class="w-[42px] px-[10px] py-[10px] bg-surface border border-line text-[10px] font-extrabold uppercase tracking-[0.3px] text-[#404040] text-center">N.º</th>
+              <th class="px-[10px] py-[10px] bg-surface border border-line text-left text-[10px] font-extrabold uppercase tracking-[0.3px] text-[#404040]">Origen (desde)</th>
+              <th class="px-[10px] py-[10px] bg-surface border border-line text-left text-[10px] font-extrabold uppercase tracking-[0.3px] text-[#404040]">Destino (hasta)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="h-[37px] p-0 border border-line bg-[#fafafa] text-muted font-semibold text-center">1</td><td class="h-[37px] p-0 border border-line"><input type="text" id="origen1" class="route-input" aria-label="Origen 1"></td><td class="h-[37px] p-0 border border-line"><input type="text" id="destino1" class="route-input" aria-label="Destino 1"></td></tr>
+            <tr><td class="h-[37px] p-0 border border-line bg-[#fafafa] text-muted font-semibold text-center">2</td><td class="h-[37px] p-0 border border-line"><input type="text" id="origen2" class="route-input" aria-label="Origen 2"></td><td class="h-[37px] p-0 border border-line"><input type="text" id="destino2" class="route-input" aria-label="Destino 2"></td></tr>
+            <tr><td class="h-[37px] p-0 border border-line bg-[#fafafa] text-muted font-semibold text-center">3</td><td class="h-[37px] p-0 border border-line"><input type="text" id="origen3" class="route-input" aria-label="Origen 3"></td><td class="h-[37px] p-0 border border-line"><input type="text" id="destino3" class="route-input" aria-label="Destino 3"></td></tr>
+            <tr><td class="h-[37px] p-0 border border-line bg-[#fafafa] text-muted font-semibold text-center">4</td><td class="h-[37px] p-0 border border-line"><input type="text" id="origen4" class="route-input" aria-label="Origen 4"></td><td class="h-[37px] p-0 border border-line"><input type="text" id="destino4" class="route-input" aria-label="Destino 4"></td></tr>
+            <tr><td class="h-[37px] p-0 border border-line bg-[#fafafa] text-muted font-semibold text-center">5</td><td class="h-[37px] p-0 border border-line"><input type="text" id="origen5" class="route-input" aria-label="Origen 5"></td><td class="h-[37px] p-0 border border-line"><input type="text" id="destino5" class="route-input" aria-label="Destino 5"></td></tr>
+            <tr><td class="h-[37px] p-0 border border-line bg-[#fafafa] text-muted font-semibold text-center">6</td><td class="h-[37px] p-0 border border-line"><input type="text" id="origen6" class="route-input" aria-label="Origen 6"></td><td class="h-[37px] p-0 border border-line"><input type="text" id="destino6" class="route-input" aria-label="Destino 6"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="bg-white border border-[#e5e5e5] rounded-[7px] shadow-[0_2px_5px_rgb(0_0_0_/_2%)] p-[19px] mb-[18px]">
+      <div class="pb-[6px] mb-4 border-b border-[#bdbdbd]">
+        <h3 class="m-0 text-[11px] font-extrabold uppercase tracking-[0.45px] text-[#404040]">04 · Personal y diagnóstico</h3>
+        <p class="mt-[3px] mb-0 text-[11px] text-muted">Datos del equipo interviniente y novedades del servicio.</p>
+      </div>
+      <div class="grid grid-cols-12 gap-[13px]">
+        <div class="col-span-12 md:col-span-6 flex flex-col gap-[5px] min-w-0">
+          <label for="personalChofer" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Chofer</label>
+          <input id="personalChofer" type="text" placeholder="Apellido y nombre" class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] placeholder:text-[#a3a3a3] focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-6 flex flex-col gap-[5px] min-w-0">
+          <label for="medico" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Médica/o</label>
+          <input id="medico" type="text" placeholder="Apellido y nombre" class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] placeholder:text-[#a3a3a3] focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-6 flex flex-col gap-[5px] min-w-0">
+          <label for="enfermero" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Enfermera/o</label>
+          <input id="enfermero" type="text" placeholder="Apellido y nombre" class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] placeholder:text-[#a3a3a3] focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 md:col-span-6 flex flex-col gap-[5px] min-w-0">
+          <label for="diagnostico" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Diagnóstico</label>
+          <input id="diagnostico" type="text" placeholder="Diagnóstico o motivo asistencial" class="w-full min-h-[35px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] placeholder:text-[#a3a3a3] focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]">
+        </div>
+        <div class="col-span-12 flex flex-col gap-[5px] min-w-0">
+          <label for="novedades" class="text-[10px] font-bold uppercase tracking-[0.3px] text-soft">Novedades</label>
+          <textarea id="novedades" placeholder="Observaciones relevantes del traslado..." class="w-full min-h-[60px] px-[10px] py-2 border border-line rounded-[4px] bg-white text-[12px] placeholder:text-[#a3a3a3] resize-y focus:outline-none focus:border-muted focus:shadow-[0_0_0_2px_rgb(115_115_115_/_12%)]"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCIONES -->
+    <div class="flex justify-end gap-2 my-4 mb-[22px]">
+      <button type="button" onclick="limpiarPlanilla()"
+              class="inline-flex items-center justify-center gap-[7px] min-h-[36px] px-[13px] py-2
+                     border border-line rounded-[5px] bg-white text-[12px] font-semibold
+                     hover:bg-surface hover:border-[#a3a3a3] transition-colors">
+        Limpiar formulario
+      </button>
+      <button type="button" onclick="imprimirPlanilla()"
+              class="inline-flex items-center justify-center gap-[7px] min-h-[36px] px-[13px] py-2
+                     border border-base rounded-[5px] bg-base text-white text-[12px] font-semibold
+                     hover:bg-[#404040] transition-colors">
+        Imprimir / Guardar PDF
+      </button>
+    </div>
+
+    <!-- VISTA PREVIA: un solo contenedor, la planilla se genera acá -->
+    <section class="preview-panel bg-white border border-[#e5e5e5] rounded-[7px] p-[19px]">
+      <div class="flex items-center justify-between gap-3 mb-[14px]">
+        <h3 class="m-0 text-[13px] font-bold">Vista previa de impresión</h3>
+        <span class="text-muted text-[11px]">Formato A4 · Vertical</span>
+      </div>
+      <div class="preview-frame p-[14px] overflow-auto bg-[#f3f4f6] border border-[#e5e5e5] rounded-[4px]">
+        <!-- ÚNICO contenedor de la planilla -->
+        <div id="planilla" class="print-sheet"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="no-print px-6 py-4 text-muted text-center text-[11px]">
+    Hospital de San Cristóbal «Julio C. Villanueva» · Sistema de Emergencias y Traslados
+  </footer>
+
+  <script>
+    "use strict";
+
+    const camposTexto = [
+      "tipoVehiculo","patente","chofer","objeto","kmSalida","kmRegreso",
+      "medico","enfermero","diagnostico","novedades","personalChofer",
+      "origen1","destino1","origen2","destino2","origen3","destino3",
+      "origen4","destino4","origen5","destino5","origen6","destino6"
+    ];
+    const camposFecha = ["fecha","fechaSalida","fechaRegreso"];
+    const camposHora  = ["horaSalida","horaRegreso"];
+
+    const equipamiento = [
+      ["eqGato","Gato"],
+      ["eqAuxilio","Rueda de auxilio"],
+      ["eqBalizas","Balizas plásticas"],
+      ["eqVerde","Tarjeta verde"],
+      ["eqCombustible","Tarjeta combustible"],
+      ["eqEnganche","Enganche"]
+    ];
+
+    function obtenerValor(id) {
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : "";
+    }
+    function escaparHTML(valor) {
+      return String(valor ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      })[c]);
+    }
+    function textoOLinea(valor) {
+      return valor ? escaparHTML(valor) : '<span style="display:block;width:100%;height:3mm;"></span>';
+    }
+    function campoPlanilla(etiqueta, id, clase) {
+      return `<div class="sheet-field ${clase}"><strong>${etiqueta}:</strong><span class="line">${textoOLinea(obtenerValor(id))}</span></div>`;
+    }
+    function fechaArgentina(valor) {
+      if (!valor) return "";
+      const p = valor.split("-");
+      if (p.length !== 3) return valor;
+      return `${p[2]}/${p[1]}/${p[0]}`;
+    }
+    function campoFecha(etiqueta, id, clase) {
+      return `<div class="sheet-field ${clase}"><strong>${etiqueta}:</strong><span class="line">${textoOLinea(fechaArgentina(obtenerValor(id)))}</span></div>`;
+    }
+    function campoHora(etiqueta, id, clase) {
+      return `<div class="sheet-field ${clase}"><strong>${etiqueta}:</strong><span class="line">${textoOLinea(obtenerValor(id))}</span></div>`;
+    }
+
+    function construirPlanilla() {
+      const checks = equipamiento.map(([id, etiqueta]) => {
+        const marcado = document.getElementById(id)?.checked;
+        const simbolo = marcado ? "X" : "";
+        return `<div class="sheet-check"><span class="sheet-checkbox">${simbolo}</span><span>${escaparHTML(etiqueta)}</span></div>`;
+      }).join("");
+
+      const trayectos = Array.from({ length: 6 }, (_, i) => {
+        const n = i + 1;
+        return `<tr><td>${n}</td><td>${textoOLinea(obtenerValor("origen"+n))}</td><td>${textoOLinea(obtenerValor("destino"+n))}</td></tr>`;
+      }).join("");
+
+      return `
+        <article class="print-sheet-inner">
+          <header class="sheet-header">
+            <div class="sheet-logo-left"><img src="logo-hospital.png" alt="Logo Hospital"></div>
+            <div class="sheet-title">
+              <h1>Hoja de Ruta y Viáticos</h1>
+              <p>Hospital de San Cristóbal «Julio C. Villanueva»</p>
+              <p class="sheet-title-sub">S.E.T. · Sistema de Emergencias y Traslados</p>
+            </div>
+            <div class="sheet-logo-right"><img src="santa%20fe.webp" alt="Escudo Santa Fe"></div>
+          </header>
+
+          <div class="sheet-rule"></div>
+
+          <section class="sheet-section">
+            <h2 class="sheet-section-title">1. Datos del vehículo y comisión</h2>
+            <div class="sheet-fields">
+              ${campoPlanilla("Tipo de vehículo","tipoVehiculo","span-5")}
+              ${campoPlanilla("Patente","patente","span-4")}
+              ${campoFecha("Fecha","fecha","span-3")}
+              ${campoPlanilla("Asignado a (chofer)","chofer","span-12")}
+              ${campoPlanilla("Objeto de la comisión","objeto","span-12")}
+              ${campoFecha("Fecha salida","fechaSalida","span-4")}
+              ${campoHora("Hora salida","horaSalida","span-4")}
+              ${campoPlanilla("Km salida","kmSalida","span-4")}
+              ${campoFecha("Fecha regreso","fechaRegreso","span-4")}
+              ${campoHora("Hora regreso","horaRegreso","span-4")}
+              ${campoPlanilla("Km regreso","kmRegreso","span-4")}
+            </div>
+          </section>
+
+          <section class="sheet-section">
+            <h2 class="sheet-section-title">2. Verificación de equipamiento y documentación</h2>
+            <div class="sheet-checklist">${checks}</div>
+          </section>
+
+          <section class="sheet-section">
+            <h2 class="sheet-section-title">3. Registro de trayectos</h2>
+            <table class="sheet-route-table">
+              <thead><tr><th>N.º</th><th>Origen (desde)</th><th>Destino (hasta)</th></tr></thead>
+              <tbody>${trayectos}</tbody>
+            </table>
+          </section>
+
+          <section class="sheet-section">
+            <h2 class="sheet-section-title">4. Personal y diagnóstico</h2>
+            <div class="sheet-fields">
+              ${campoPlanilla("Chofer","personalChofer","span-6")}
+              ${campoPlanilla("Médica/o","medico","span-6")}
+              ${campoPlanilla("Enfermera/o","enfermero","span-6")}
+              ${campoPlanilla("Diagnóstico","diagnostico","span-6")}
+              <div class="sheet-field span-12"><strong>Novedades:</strong><span class="line">${textoOLinea(obtenerValor("novedades"))}</span></div>
+            </div>
+          </section>
+
+          <section class="sheet-section">
+            <div class="sheet-notice">
+              <div class="sheet-notice-title">Advertencia · Liquidación de viáticos</div>
+              <p><strong>La planilla debe completarse de manera legible y con todos los campos correspondientes.</strong> La falta de información requerida puede impedir la liquidación en el período previsto.</p>
+              <p><strong>Aviso:</strong> Si la planilla está incompleta o faltan datos necesarios para liquidar el viático, el pago quedará pendiente y pasará al mes siguiente.</p>
+              <p><strong>Importante:</strong> Verifique que los kilómetros de salida y regreso coincidan con el recorrido declarado. Las planillas sin firma del chofer no serán aceptadas para su procesamiento.</p>
+              <p class="notice-divider"><strong>Recomendación:</strong> Antes de entregar la planilla, controle que todos los campos estén completos y que la firma corresponda al chofer asignado al servicio.</p>
+            </div>
+          </section>
+
+          <footer class="sheet-signatures">
+            <div class="sheet-signature">
+              <div class="sheet-signature-line"></div>
+              <div class="sheet-signature-label">Firma y aclaración del chofer</div>
+              <div class="sheet-signature-caption">Apellido y nombre</div>
+            </div>
+          </footer>
+        </article>
+      `;
+    }
+
+    function actualizarVista() {
+      // UN SOLO contenedor: la planilla vive acá y se imprime desde acá.
+      document.getElementById("planilla").innerHTML = construirPlanilla();
+    }
+
+    function imprimirPlanilla() {
+      actualizarVista();
+      requestAnimationFrame(() => window.print());
+    }
+
+    function limpiarPlanilla() {
+      if (!window.confirm("¿Querés borrar todos los datos de la planilla?")) return;
+      [...camposTexto, ...camposFecha, ...camposHora].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+      });
+      equipamiento.forEach(([id]) => {
+        const el = document.getElementById(id);
+        if (el) el.checked = false;
+      });
+      actualizarVista();
+    }
+
+    document.addEventListener("input", actualizarVista);
+    document.addEventListener("change", actualizarVista);
+
+    // Precarga de imágenes antes de la primera vista
+    const imgs = ["logo-hospital.png","santa%20fe.webp"];
+    let cargadas = 0;
+    imgs.forEach(src => {
+      const i = new Image();
+      i.onload = i.onerror = () => {
+        cargadas++;
+        if (cargadas === imgs.length) actualizarVista();
+      };
+      i.src = src;
+    });
+    setTimeout(actualizarVista, 800);
+  </script>
+
+</body>
+</html>

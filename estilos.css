@@ -1,0 +1,167 @@
+/* ========== Inputs de tabla ========== */
+.route-input {
+  width: 100%; height: 100%; min-height: 35px;
+  padding: 6px 8px; border: 0; outline: none;
+  background: transparent; font-size: 12px;
+  font-family: inherit; color: #262626;
+}
+.route-input:focus { background: #fafafa; box-shadow: inset 0 0 0 1px #737373; }
+
+/* ========== Checklist UI ========== */
+.check-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: #404040; cursor: pointer;
+  user-select: none; min-width: 0;
+}
+.check-item input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 12px; height: 12px; margin: 0;
+  border: 1px solid #525252; background: #fff;
+  flex-shrink: 0; position: relative; cursor: pointer;
+}
+.check-item input[type="checkbox"]:checked::after {
+  content: "✓"; position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: #262626; line-height: 1;
+}
+
+/* ========== PLANILLA (misma apariencia en pantalla y en impresión) ========== */
+.print-sheet {
+  width: 194mm;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 0;
+  background: #fff;
+  color: #171717;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 9pt;
+  line-height: 1.35;
+}
+
+.sheet-header {
+  display: grid;
+  grid-template-columns: 30mm 1fr 30mm;
+  align-items: center;
+  gap: 6mm;
+  padding-bottom: 4mm;
+  min-height: 24mm;
+}
+.sheet-logo-left  { display: flex; align-items: center; justify-content: flex-start; min-height: 22mm; }
+.sheet-logo-right { display: flex; align-items: center; justify-content: flex-end;   min-height: 22mm; }
+.sheet-logo-left  img { display: block; width: 22mm; height: 22mm; object-fit: contain; }
+.sheet-logo-right img { display: block; width: 24mm; height: 22mm; object-fit: contain; }
+
+.sheet-title { text-align: center; }
+.sheet-title h1 {
+  margin: 0; font-size: 15pt; font-weight: 800;
+  line-height: 1.1; text-transform: uppercase; letter-spacing: -.3px; color: #171717;
+}
+.sheet-title p { margin: 2mm 0 0; font-size: 8pt; font-weight: 600; color: #525252; }
+.sheet-title .sheet-title-sub { margin-top: 1mm; font-size: 7.5pt; font-weight: 700; letter-spacing: .4px; color: #737373; text-transform: uppercase; }
+
+.sheet-rule { height: 0; border: 0; border-top: .5pt solid #d4d4d4; margin: 0 0 4mm; }
+
+.sheet-section { margin-bottom: 4mm; break-inside: avoid; }
+.sheet-section-title {
+  padding-bottom: 1mm; margin: 0 0 2.5mm;
+  color: #171717; font-size: 8pt; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .5px;
+}
+
+.sheet-fields { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 2.5mm 3mm; }
+.sheet-field { display: flex; align-items: baseline; min-width: 0; gap: 1.5mm; font-size: 8.5pt; }
+.sheet-field strong { flex-shrink: 0; font-weight: 700; color: #262626; }
+.sheet-field .line { height: 4mm; min-width: 0; flex: 1; border-bottom: .5pt dotted #a3a3a3; }
+.sheet-field.span-3  { grid-column: span 3; }
+.sheet-field.span-4  { grid-column: span 4; }
+.sheet-field.span-5  { grid-column: span 5; }
+.sheet-field.span-6  { grid-column: span 6; }
+.sheet-field.span-12 { grid-column: span 12; }
+
+.sheet-checklist { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 2.5mm 3mm; padding: 3mm 0; }
+.sheet-check { display: flex; align-items: center; gap: 2mm; font-size: 8pt; color: #262626; white-space: nowrap; }
+.sheet-checkbox {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 3.5mm; height: 3.5mm; border: .5pt solid #a3a3a3;
+  flex-shrink: 0; font-size: 7pt; font-weight: 800; line-height: 1; color: #171717;
+}
+
+.sheet-route-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 8.5pt; }
+.sheet-route-table th {
+  height: 7mm; padding: 1.5mm 2mm; border-bottom: .5pt solid #a3a3a3;
+  color: #171717; text-align: left; font-size: 7pt; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .4px;
+}
+.sheet-route-table td { height: 7mm; padding: 1mm 2mm; border-bottom: .5pt dotted #d4d4d4; }
+.sheet-route-table th:first-child, .sheet-route-table td:first-child { width: 10mm; text-align: center; }
+.sheet-route-table td:first-child { color: #737373; font-weight: 700; }
+.sheet-route-table tr:last-child td { border-bottom: .5pt solid #a3a3a3; }
+
+.sheet-notice {
+  padding: 3mm 4mm; border-left: 2mm solid #b91c1c;
+  background: #fef2f2; color: #171717;
+  font-size: 8.5pt; line-height: 1.4; break-inside: avoid;
+}
+.sheet-notice-title { margin-bottom: 2mm; color: #b91c1c; font-size: 9pt; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; }
+.sheet-notice p { margin: 0 0 1.5mm; }
+.sheet-notice p:last-child { margin-bottom: 0; }
+.sheet-notice .notice-divider { padding-top: 1.5mm; margin-top: 1.5mm; border-top: .5pt solid #fca5a5; }
+
+.sheet-signatures {
+  display: flex; justify-content: flex-end;
+  padding-top: 16mm; padding-right: 8mm;
+  min-height: 30mm; break-inside: avoid;
+}
+.sheet-signature { width: 72mm; text-align: center; }
+.sheet-signature-line { height: 0; border-top: .8pt solid #262626; margin: 0 0 1.5mm; }
+.sheet-signature-label { font-size: 8pt; font-weight: 750; text-transform: uppercase; letter-spacing: .3px; color: #262626; }
+.sheet-signature-caption { margin-top: 1mm; color: #737373; font-size: 7pt; }
+
+/* ========== IMPRESIÓN: SOLO se imprime #planilla ========== */
+@page { size: A4 portrait; margin: 8mm; }
+
+@media print {
+  html, body {
+    width: auto !important; min-height: 0 !important;
+    margin: 0 !important; padding: 0 !important;
+    background: #fff !important; color: #171717 !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  body { font-size: 9pt !important; }
+
+  /* Ocultar TODO */
+  body * { visibility: hidden !important; }
+
+  /* Mostrar SOLO la planilla y sus descendientes */
+  #planilla, #planilla * { visibility: visible !important; }
+
+  /* Sacar la planilla del layout de la app y ubicarla en la hoja */
+  #planilla {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 194mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #fff !important;
+  }
+
+  .print-sheet-inner {
+    display: block !important;
+    width: 194mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .sheet-section { margin-bottom: 4mm !important; break-inside: avoid !important; }
+  .sheet-route-table tr,
+  .sheet-checklist,
+  .sheet-notice,
+  .sheet-signatures { break-inside: avoid !important; }
+
+  input, textarea, select, button { display: none !important; }
+  img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
